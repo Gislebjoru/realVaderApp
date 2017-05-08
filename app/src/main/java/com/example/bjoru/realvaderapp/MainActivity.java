@@ -1,5 +1,6 @@
 package com.example.bjoru.realvaderapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Intent intent = new Intent(this, Langtidsvarsel.class);
+
         final TextView tempText = (TextView)findViewById(R.id.tempText);
         final TextView wsText = (TextView)findViewById(R.id.wsText);
         final TextView wdText = (TextView)findViewById(R.id.wdText);
@@ -26,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         new VaderData(new VaderData.AsyncResponse() {
             @Override
             public void processFinish(WeatherData output) {
-                //Hello
+
+
                 Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
                 WindSpeed wspeed = output.getForecast().getTimeList().get(0).getWindSpeed();
                 Pressure pressure = output.getForecast().getTimeList().get(0).getPressure();
@@ -58,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //testFelt.setText(String.valueOf(sokeFelt.getText()));
+            }
+        });
+
+        final Button langtidsvarsel = (Button) findViewById(R.id.button2);
+        langtidsvarsel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(intent);
             }
         });
     }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">realVaderApp</string>
+    <string name="title_activity_langtidsvarsel">Langtidsvarsel</string>
 </resources>
