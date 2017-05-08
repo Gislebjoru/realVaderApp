@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void processFinish(WeatherData output) {
 
-//github test lmao
 
+                //dette er en test for GitHub Pushing
                 Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
                 WindSpeed wspeed = output.getForecast().getTimeList().get(0).getWindSpeed();
                 Pressure pressure = output.getForecast().getTimeList().get(0).getPressure();
