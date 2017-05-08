@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void processFinish(WeatherData output) {
 
 
-                //dette er en test for GitHub Pushing
+                //github dl og push fra laptop
                 Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
                 WindSpeed wspeed = output.getForecast().getTimeList().get(0).getWindSpeed();
                 Pressure pressure = output.getForecast().getTimeList().get(0).getPressure();
