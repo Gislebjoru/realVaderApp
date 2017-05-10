@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String myString = "myString";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void processFinish(WeatherData output) {
 
-
-                Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
+                final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
+                final String timeTo = output.getForecast().getTimeList().get(0).getTo();
+                final Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
                 WindSpeed wspeed = output.getForecast().getTimeList().get(0).getWindSpeed();
                 Pressure pressure = output.getForecast().getTimeList().get(0).getPressure();
                 WindDirection wdir = output.getForecast().getTimeList().get(0).getWindDirection();
@@ -50,8 +53,21 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     pressureText.setText(String.valueOf("Lavtrykk"+"("+pressure.getValue()+" hPa)"));
                 }
+
                 //symbolImg.setImageResource(R.drawable.class);
 
+                final Button langtidsvarsel = (Button) findViewById(R.id.button2);
+                langtidsvarsel.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        String message = String.valueOf(timeFrom+"-"+timeTo);
+                        intent.putExtra(myString, message);
+                        startActivity(intent);
+                    }
+                });
+
+                for(int i=1;i<timeList.length;i++) {
+                    Time t = timeList[i];
+                }
 
             }
         }).execute();
@@ -62,13 +78,6 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //testFelt.setText(String.valueOf(sokeFelt.getText()));
-            }
-        });
-
-        final Button langtidsvarsel = (Button) findViewById(R.id.button2);
-        langtidsvarsel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(intent);
             }
         });
     }
