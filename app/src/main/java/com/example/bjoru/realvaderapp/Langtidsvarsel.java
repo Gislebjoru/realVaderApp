@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class Langtidsvarsel extends AppCompatActivity {
 
 
                 List<Time> timeList = output.getForecast().getTimeList();
+                String longtime = "";
 
                 final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
                 final String timeTo = output.getForecast().getTimeList().get(0).getTo();
@@ -38,10 +40,21 @@ public class Langtidsvarsel extends AppCompatActivity {
 
                 for(int i=1;i<timeList.size();i++) {
                     Time t = timeList.get(i);
-                    langtid.setText(String.valueOf(timeFrom+" "+timeTo+", "+temp.getValue()+" "+temp.getUnit()+", "+wspeed.getName()+", "+wdir.getName()));
+                    String splitFrom = String.valueOf(t.getFrom());
+                    String splitTo = String.valueOf(t.getTo());
+                    String[] toSplit = splitTo.split("T");
+                    String[] toSplit2 = toSplit[0].split("-");
+                    String[] fromSplit = splitFrom.split("T");
+                    String[] fromSplit2 = fromSplit[0].split("-");
+                    longtime += String.valueOf(fromSplit2[2]+" "+fromSplit2[1]+" "+fromSplit2[0]+" "+fromSplit[1]+" - "
+                            +toSplit2[2]+" "+toSplit2[1]+" "+toSplit2[0]+" "+toSplit[1]+" "+t.getTemperature().getValue()+" "
+                            +t.getTemperature().getUnit()+"\n"+"\n");
                     System.out.println(i);
 
                 }
+                langtid.setText(longtime);
+                langtid.setMovementMethod(new ScrollingMovementMethod());
+
 
             }
         }).execute();
