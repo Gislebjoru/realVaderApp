@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String myString = "myString";
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void processFinish(WeatherData output) {
 
+                List<Time> timeList = output.getForecast().getTimeList();
                 final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
                 final String timeTo = output.getForecast().getTimeList().get(0).getTo();
                 final Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
@@ -59,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
                 final Button langtidsvarsel = (Button) findViewById(R.id.button2);
                 langtidsvarsel.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
-                        String message = String.valueOf(timeFrom+"-"+timeTo);
-                        intent.putExtra(myString, message);
+                        //String message = String.valueOf(timeFrom+"-"+timeTo);
+                        //intent.putExtra(myString, t);
                         startActivity(intent);
                     }
                 });
 
-                for(int i=1;i<timeList.length;i++) {
-                    Time t = timeList[i];
+                for(int i=1;i<timeList.size();i++) {
+                    Time t = timeList.get(i);
                 }
 
             }
