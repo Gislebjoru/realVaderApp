@@ -1,5 +1,6 @@
 package com.example.bjoru.realvaderapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import org.springframework.http.HttpMethod;
@@ -13,9 +14,14 @@ import org.springframework.web.client.RestTemplate;
 
 public class VaderData extends AsyncTask<String, Void, WeatherData>{
 
+    final public static String url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo/varsel.xml";
+    final public static String[] newUrl = url.split("/");
+
     @Override
     protected WeatherData doInBackground(String... params) {
-        final String url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo/varsel.xml";
+        //final String url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo/varsel.xml";
+        final String[] newUrl = url.split("/");
+        System.out.println(newUrl[0]);
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
 
@@ -24,6 +30,7 @@ public class VaderData extends AsyncTask<String, Void, WeatherData>{
         WeatherData weatherData = responseEntity.getBody();
 
         return weatherData;
+
     }
 
     public interface AsyncResponse {
@@ -39,5 +46,6 @@ public class VaderData extends AsyncTask<String, Void, WeatherData>{
 
     protected void onPostExecute(WeatherData result) {
         delegate.processFinish(result);
+
     }
 }

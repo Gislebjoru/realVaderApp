@@ -49,7 +49,7 @@ public class Langtidsvarsel extends AppCompatActivity {
                     longtime += String.valueOf(fromSplit2[2]+" "+fromSplit2[1]+" "+fromSplit2[0]+" "+fromSplit[1]+" - "
                             +toSplit2[2]+" "+toSplit2[1]+" "+toSplit2[0]+" "+toSplit[1]+" "+t.getTemperature().getValue()+" "
                             +t.getTemperature().getUnit()+"\n"+"\n");
-                    System.out.println(i);
+
 
                 }
                 langtid.setText(longtime);

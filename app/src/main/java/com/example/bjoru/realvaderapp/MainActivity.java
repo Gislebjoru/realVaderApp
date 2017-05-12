@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void processFinish(WeatherData output) {
 
+                String test = String.valueOf(VaderData.newUrl[5]+" "+VaderData.newUrl[6]+" "+VaderData.newUrl[7]);
                 List<Time> timeList = output.getForecast().getTimeList();
                 final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
                 final String timeTo = output.getForecast().getTimeList().get(0).getTo();
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     pressureText.setText(String.valueOf("Lavtrykk"+"("+pressure.getValue()+" hPa)"));
                 }
+                System.out.println(test);
+
 
                 //symbolImg.setImageResource(R.drawable.class);
 
@@ -68,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                for(int i=1;i<timeList.size();i++) {
-                    Time t = timeList.get(i);
-                }
+
 
             }
         }).execute();
