@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+
+
 /**
  * Created by BjoruLaptop on 04.05.2017.
  */
@@ -15,13 +17,11 @@ import org.springframework.web.client.RestTemplate;
 public class VaderData extends AsyncTask<String, Void, WeatherData>{
 
     final public static String url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo/varsel.xml";
-    final public static String[] newUrl = url.split("/");
+    //final public static String[] newUrl = url.split("/");
+    //final public static String finalurl = "https://www.yr.no/sted/Norge/Nord-trøndelag/Namsos/"+city+"/varsel.xml";
 
     @Override
     protected WeatherData doInBackground(String... params) {
-        //final String url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo/varsel.xml";
-        final String[] newUrl = url.split("/");
-        System.out.println(newUrl[0]);
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
 

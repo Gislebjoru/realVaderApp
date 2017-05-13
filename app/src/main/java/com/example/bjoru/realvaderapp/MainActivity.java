@@ -13,7 +13,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String myString = "myString";
+    //public static final String myString = "myString";
+    //public static String city = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
         final TextView pressureText = (TextView)findViewById(R.id.presText);
         //final ImageView symbolImg = (ImageView)findViewById(R.id.myImg);
        // final TextView testFelt = (TextView) findViewById(R.id.textView2);
-       // final EditText sokeFelt = (EditText) findViewById(R.id.sokeFelt);
+        final EditText sokeFelt = (EditText) findViewById(R.id.sokeFelt);
 
         new VaderData(new VaderData.AsyncResponse() {
             @Override
             public void processFinish(WeatherData output) {
 
-                String test = String.valueOf(VaderData.newUrl[5]+" "+VaderData.newUrl[6]+" "+VaderData.newUrl[7]);
+                //String test = String.valueOf(VaderData.newUrl[5]+" "+VaderData.newUrl[6]+" "+VaderData.newUrl[7]);
                 List<Time> timeList = output.getForecast().getTimeList();
                 final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
                 final String timeTo = output.getForecast().getTimeList().get(0).getTo();
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     pressureText.setText(String.valueOf("Lavtrykk"+"("+pressure.getValue()+" hPa)"));
                 }
-                System.out.println(test);
+                //System.out.println(test);
 
 
                 //symbolImg.setImageResource(R.drawable.class);
@@ -81,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
         final Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                //testFelt.setText(String.valueOf(sokeFelt.getText()));
+                //city.setText(String.valueOf(sokeFelt.getText()));
+                //city = String.valueOf(sokeFelt.getText());
+                //System.out.println(city);
             }
         });
     }
