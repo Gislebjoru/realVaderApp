@@ -108,4 +108,22 @@
             android:textSize="18sp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/latitude_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_below="@+id/linearLayout"
+        android:text="Latitude" />
+
+    <TextView
+        android:id="@+id/longitude_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/latitude_text"
+        android:layout_alignRight="@+id/latitude_text"
+        android:layout_below="@+id/latitude_text"
+        android:text="Longitude" />
+
 </RelativeLayout>

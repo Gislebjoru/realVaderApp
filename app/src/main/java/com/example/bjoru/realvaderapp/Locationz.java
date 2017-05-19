@@ -4,7 +4,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root(strict=false)
-public class Location {
+public class Locationz {
     @Element(required = false)
     String name;
 

@@ -1,27 +1,57 @@
 package com.example.bjoru.realvaderapp;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
     //public static final String myString = "myString";
     //public static String city = "";
+
+    protected static final String TAG = "MainActivity";
+
+    protected GoogleApiClient mGoogleApiClient;
+
+    protected Location mLastlocation;
+
+    protected String mLatitudeLabel;
+    protected String mLongitudeLabel;
+
+    protected TextView mLatitudeText;
+    protected TextView mLongitudeText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //mLatitudeLabel = getResources().getString(R.string.latitude_label);
+        //mLongitudeLabel = getResources().getString(R.string.longitude_label);
+        mLatitudeText = (TextView) findViewById(R.id.latitude_text);
+        mLongitudeText = (TextView) findViewById(R.id.longitude_text);
+
+        buildGoogleApiClient();
+
         final Intent intent = new Intent(this, Langtidsvarsel.class);
+
+
 
         final TextView tempText = (TextView)findViewById(R.id.tempText);
         final TextView wsText = (TextView)findViewById(R.id.wsText);
@@ -87,5 +117,53 @@ public class MainActivity extends AppCompatActivity {
                 //System.out.println(city);
             }
         });
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+
+        mLastlocation= LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastlocation != null) {
+            mLatitudeText.setText(String.format("%s: %f", mLatitudeLabel,
+                    mLastlocation.getLatitude()));
+            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel,
+                    mLastlocation.getLongitude()));
+        } else {
+            Toast.makeText(this, "No location detected", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        Log.i(TAG, "Connection suspended");
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        Log.i(TAG, "Connection failed: connectionResult.getErrorCode() = " + result.getErrorCode());
     }
 }
