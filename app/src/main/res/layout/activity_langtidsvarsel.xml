@@ -7,23 +7,13 @@
     tools:context="com.example.bjoru.realvaderapp.Langtidsvarsel">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/langtidsvarsel"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout2"
-        app:srcCompat="@android:drawable/btn_dialog" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout2"></LinearLayout>
+        android:id="@+id/linearLayout2">
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/langtidsvarsel"
@@ -34,9 +24,23 @@
         android:textColor="#000"
         android:textSize="12dp"
         android:scrollbars="vertical"
-        android:maxLines="10"
-        android:layout_alignParentBottom="true"
+        android:maxLines="20"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="179dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Langtidsvarsel"
+        android:textColor="#000"
+        android:textSize="36sp" />
 
 </RelativeLayout>

@@ -31,12 +31,12 @@ public class Langtidsvarsel extends AppCompatActivity {
                 List<Time> timeList = output.getForecast().getTimeList();
                 String longtime = "";
 
-                final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
+                /*final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
                 final String timeTo = output.getForecast().getTimeList().get(0).getTo();
                 final Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
                 WindSpeed wspeed = output.getForecast().getTimeList().get(0).getWindSpeed();
                 Pressure pressure = output.getForecast().getTimeList().get(0).getPressure();
-                WindDirection wdir = output.getForecast().getTimeList().get(0).getWindDirection();
+                WindDirection wdir = output.getForecast().getTimeList().get(0).getWindDirection();*/
 
                 for(int i=1;i<timeList.size();i++) {
                     Time t = timeList.get(i);
