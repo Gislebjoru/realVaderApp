@@ -1,5 +1,6 @@
 package com.example.bjoru.realvaderapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,14 @@ public class Langtidsvarsel extends AppCompatActivity {
 
         final TextView langtid = (TextView) findViewById(R.id.langtidsvarsel);
         //String message = getIntent().getStringExtra(MainActivity.myString);
+        final Intent goBack = new Intent(this, MainActivity.class);
+
+        final Button tilbakeKnapp = (Button) findViewById(R.id.tilbakeKnapp2);
+        tilbakeKnapp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(goBack);
+            }
+        });
 
 
         new VaderData(new VaderData.AsyncResponse() {
@@ -30,13 +39,6 @@ public class Langtidsvarsel extends AppCompatActivity {
 
                 List<Time> timeList = output.getForecast().getTimeList();
                 String longtime = "";
-
-                /*final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
-                final String timeTo = output.getForecast().getTimeList().get(0).getTo();
-                final Temperature temp = output.getForecast().getTimeList().get(0).getTemperature();
-                WindSpeed wspeed = output.getForecast().getTimeList().get(0).getWindSpeed();
-                Pressure pressure = output.getForecast().getTimeList().get(0).getPressure();
-                WindDirection wdir = output.getForecast().getTimeList().get(0).getWindDirection();*/
 
                 for(int i=1;i<timeList.size();i++) {
                     Time t = timeList.get(i);

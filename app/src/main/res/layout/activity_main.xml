@@ -14,18 +14,11 @@
         android:weightSum="1"
         android:id="@+id/linearLayout"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-
-        <EditText
-            android:id="@+id/sokeFelt"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:ems="10"
-            android:inputType="textPersonName" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/sokeKnapp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Søk" />
@@ -81,8 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="81dp"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@+id/longitude_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -112,10 +104,9 @@
         android:id="@+id/latitude_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout"
-        android:layout_alignStart="@+id/linearLayout"
+        android:text="Latitude"
         android:layout_below="@+id/linearLayout"
-        android:text="Latitude" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/longitude_text"

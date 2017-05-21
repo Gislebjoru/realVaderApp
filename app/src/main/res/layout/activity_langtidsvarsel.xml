@@ -33,14 +33,22 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_marginTop="179dp"
         android:layout_weight="1"
         android:gravity="center"
         android:text="Langtidsvarsel"
         android:textColor="#000"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/tilbakeKnapp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="Tilbake" />
 
 </RelativeLayout>

@@ -16,12 +16,11 @@ import org.springframework.web.client.RestTemplate;
 
 public class VaderData extends AsyncTask<String, Void, WeatherData>{
 
-    final public static String url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo/varsel.xml";
-    //final public static String[] newUrl = url.split("/");
-    //final public static String finalurl = "https://www.yr.no/sted/Norge/Nord-trøndelag/Namsos/"+city+"/varsel.xml";
 
     @Override
     protected WeatherData doInBackground(String... params) {
+
+        String url = params[0];
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
 
