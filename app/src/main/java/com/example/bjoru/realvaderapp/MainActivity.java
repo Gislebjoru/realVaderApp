@@ -1,9 +1,12 @@
 package com.example.bjoru.realvaderapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
+import android.location.*;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -13,11 +16,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.location.*;
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
 
     final int LOCATION_REQUEST_CODE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +44,7 @@ public class MainActivity extends AppCompatActivity  {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
         } else {
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        }
 
-        Intent mottaXML = getIntent();
-        String url="";
-        if(mottaXML.hasExtra("url")) {
-            url = mottaXML.getExtras().getString("url");
-        }
-        else {
-            //url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo_i_Rana/varsel.xml";
             LocationManager myLocM = (LocationManager) getSystemService(LOCATION_SERVICE);
             android.location.Location myLoc = myLocM.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             double myLat;
@@ -57,15 +56,27 @@ public class MainActivity extends AppCompatActivity  {
                 myLat = 0.0;
                 myLong = 0.0;
             }
+
             new finnLocation(this, new finnLocation.AsyncResponse() {
+                String url ="";
                 @Override
                 public void processFinished(String output) {
+                    url = output;
 
                 }
             }).execute(myLat, myLong);
 
         }
 
+        Intent mottaXML = getIntent();
+        String url="";
+        if(mottaXML.hasExtra("url")) {
+            url = mottaXML.getExtras().getString("url");
+        }
+        else {
+            url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo_i_Rana/varsel.xml";
+            System.out.println(url);
+        }
 
         new VaderData(new VaderData.AsyncResponse() {
             @Override
@@ -95,6 +106,8 @@ public class MainActivity extends AppCompatActivity  {
                 });
             }
         }).execute(url);
+
+
 
         final Button sok = (Button) findViewById(R.id.sokeKnapp);
         sok.setOnClickListener(new View.OnClickListener() {
