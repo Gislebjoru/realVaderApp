@@ -3,6 +3,7 @@ package com.example.bjoru.realvaderapp;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -31,21 +32,40 @@ public class MainActivity extends AppCompatActivity  {
         final TextView wdText = (TextView)findViewById(R.id.wdText);
         final TextView pressureText = (TextView)findViewById(R.id.presText);
 
-        Intent mottaXML = getIntent();
-        String url="";
-        if(mottaXML.hasExtra("url")) {
-            url = mottaXML.getExtras().getString("url");
-        }
-        else {
-            url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo_i_Rana/varsel.xml";
-        }
-
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
         } else {
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
+
+        Intent mottaXML = getIntent();
+        String url="";
+        if(mottaXML.hasExtra("url")) {
+            url = mottaXML.getExtras().getString("url");
+        }
+        else {
+            //url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo_i_Rana/varsel.xml";
+            LocationManager myLocM = (LocationManager) getSystemService(LOCATION_SERVICE);
+            android.location.Location myLoc = myLocM.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double myLat;
+            double myLong;
+            if (myLoc != null) {
+                myLat = myLoc.getLatitude();
+                myLong = myLoc.getLongitude();
+            } else {
+                myLat = 0.0;
+                myLong = 0.0;
+            }
+            new finnLocation(this, new finnLocation.AsyncResponse() {
+                @Override
+                public void processFinished(String output) {
+
+                }
+            }).execute(myLat, myLong);
+
+        }
+
 
         new VaderData(new VaderData.AsyncResponse() {
             @Override
