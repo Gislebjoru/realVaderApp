@@ -19,10 +19,6 @@ class WindSpeed {
         return mps;
     }
 
-    public void setMps(int mps) {
-        this.mps = mps;
-    }
-
     public String getName() {
         return name;
     }

@@ -11,32 +11,10 @@ import org.simpleframework.xml.Root;
 class Symbol {
 
     @Attribute(required = false)
-    int number;
-
-    @Attribute(required = false)
-    int numberEx;
-
-    @Attribute(required = false)
     String name;
 
     @Attribute(required = false)
     String var;
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public int getNumberEx() {
-        return numberEx;
-    }
-
-    public void setNumberEx(int numberEx) {
-        this.numberEx = numberEx;
-    }
 
     public String getName() {
         return name;
@@ -50,7 +28,5 @@ class Symbol {
         return var;
     }
 
-    public void setVar(String var) {
-        this.var = var;
-    }
+
 }

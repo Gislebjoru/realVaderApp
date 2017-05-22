@@ -60,28 +60,4 @@ public class Time {
     public void setFrom(String from) {
         this.from = from;
     }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public void setSymbol(Symbol symbol) {
-        this.symbol = symbol;
-    }
-
-    public void setWindDirection(WindDirection windDirection) {
-        this.windDirection = windDirection;
-    }
-
-    public void setWindSpeed(WindSpeed windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
-    public void setTemperature(Temperature temperature) {
-        this.temperature = temperature;
-    }
-
-    public void setPressure(Pressure pressure) {
-        this.pressure = pressure;
-    }
 }

@@ -9,31 +9,8 @@ import org.simpleframework.xml.Root;
 
 @Root(strict = false)
 class WindDirection {
-
-    @Attribute(required = false)
-    double deg;
-
-    @Attribute(required = false)
-    String code;
-
     @Attribute(required = false)
     String name;
-
-    public double getDeg() {
-        return deg;
-    }
-
-    public void setDeg(int deg) {
-        this.deg = deg;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;

@@ -13,8 +13,4 @@ public class Forecast {
     public List<Time> getTimeList() {
         return timeList;
     }
-
-    public void setTimeList(List<Time> timeList) {
-        this.timeList = timeList;
-    }
 }

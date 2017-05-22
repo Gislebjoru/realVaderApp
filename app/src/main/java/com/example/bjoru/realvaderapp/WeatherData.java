@@ -8,13 +8,14 @@ public class WeatherData {
     @Element(required = false)
     Forecast forecast;
 
+    @Element(required = false)
+    Location location;
+
     public Forecast getForecast() {
         return forecast;
     }
 
-    public void setForecast(Forecast forecast) {
-        this.forecast = forecast;
+    public Location getLocation() {
+        return location;
     }
-
-
 }

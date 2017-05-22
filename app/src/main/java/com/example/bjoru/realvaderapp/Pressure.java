@@ -23,12 +23,4 @@ class Pressure {
     public double getValue() {
         return value;
     }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
 }

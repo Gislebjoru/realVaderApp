@@ -21,12 +21,4 @@ class Temperature {
     public int getValue() {
         return value;
     }
-
-    public void setUnit(String unit) {
-        unit = unit;
-    }
-
-    public void setValue(int value) {
-        value = value;
-    }
 }

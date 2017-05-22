@@ -18,7 +18,6 @@ public class Langtidsvarsel extends AppCompatActivity {
         setContentView(R.layout.activity_langtidsvarsel);
 
         final TextView langtid = (TextView) findViewById(R.id.langtidsvarsel);
-        //String message = getIntent().getStringExtra(MainActivity.myString);
         final Intent goBack = new Intent(this, MainActivity.class);
 
         final Button tilbakeKnapp = (Button) findViewById(R.id.tilbakeKnapp2);
@@ -28,11 +27,12 @@ public class Langtidsvarsel extends AppCompatActivity {
             }
         });
 
+        Intent url = getIntent();
+        String myUrl = url.getExtras().getString("url");
 
         new VaderData(new VaderData.AsyncResponse() {
             @Override
             public void processFinish(WeatherData output) {
-
 
                 List<Time> timeList = output.getForecast().getTimeList();
                 String longtime = "";
@@ -48,18 +48,11 @@ public class Langtidsvarsel extends AppCompatActivity {
                     longtime += String.valueOf(fromSplit2[2]+" "+fromSplit2[1]+" "+fromSplit2[0]+" "+fromSplit[1]+" - "
                             +toSplit2[2]+" "+toSplit2[1]+" "+toSplit2[0]+" "+toSplit[1]+" "+t.getTemperature().getValue()+" "
                             +t.getTemperature().getUnit()+"\n"+"\n");
-
-
                 }
                 langtid.setText(longtime);
                 langtid.setMovementMethod(new ScrollingMovementMethod());
-
-
             }
-        }).execute();
-
-
-
+        }).execute(myUrl);
     }
 
 }

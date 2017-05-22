@@ -2,8 +2,12 @@ package com.example.bjoru.realvaderapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +49,7 @@ public class sokActivity extends AppCompatActivity {
                         fil.close();
                         text = new String(buffer);
                 } catch (IOException ex) {
-                    System.out.println("Errorhandling LMAO");
+                    System.out.println("IOException"+" "+ex);
                 }
                 EditText mySok = (EditText) findViewById(R.id.sokeFelt);
                 String myString = mySok.getText().toString();
@@ -55,8 +59,11 @@ public class sokActivity extends AppCompatActivity {
                     String[] rader = l.split("\t");
                     if(rader[1].contains(myString)) {
                         TextView myTv = new TextView(context);
-                        System.out.println(rader[1]);
+                        myTv.setMovementMethod(new ScrollingMovementMethod());
                         mySearch = rader[1].toString()+"\n";
+                        myTv.setTextColor(Color.parseColor("#000000"));
+                        myTv.setGravity(Gravity.CENTER);
+                        myTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                         myTv.setText(mySearch);
                         myTv.setTag(rader[12]);
                         myLL.addView(myTv);
@@ -64,7 +71,6 @@ public class sokActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 String id = view.getTag().toString();
                                 goBack.putExtra("url", id);
-                                System.out.println(id);
                                 startActivity(goBack);
                             }
                         });
