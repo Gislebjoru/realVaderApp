@@ -1,35 +1,45 @@
 package com.example.bjoru.realvaderapp;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.*;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.location.*;
-import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity  implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     final int LOCATION_REQUEST_CODE = 1;
+    protected static final String TAG = "MainActivity";
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mLastLocation;
+    protected String mLatitudeLabel;
+    protected String mLongitudeLabel;
+    protected TextView mLatitudeText;
+    protected TextView mLongitudeText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mLatitudeLabel = getResources().getString(R.string.latitude_label);
+        mLongitudeLabel = getResources().getString(R.string.longitude_label);
+        mLatitudeText = (TextView) findViewById((R.id.latitude_text));
+        mLongitudeText = (TextView) findViewById((R.id.longitude_text));
+
+        buildGoogleApiClient();
 
         final Intent intent = new Intent(this, Langtidsvarsel.class);
         final Intent intent2 = new Intent(this, sokActivity.class);
@@ -39,34 +49,30 @@ public class MainActivity extends AppCompatActivity  {
         final TextView wdText = (TextView)findViewById(R.id.wdText);
         final TextView pressureText = (TextView)findViewById(R.id.presText);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
+
+        double myLat;
+        double myLong;
+        if(mLastLocation !=null) {
+            myLat = Double.valueOf(mLastLocation.getLatitude());
+            System.out.println(mLastLocation.getLatitude());
+            System.out.println(mLastLocation.getLongitude());
+            myLong = Double.valueOf(mLastLocation.getLongitude());
         } else {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
-            LocationManager myLocM = (LocationManager) getSystemService(LOCATION_SERVICE);
-            android.location.Location myLoc = myLocM.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            double myLat;
-            double myLong;
-            if (myLoc != null) {
-                myLat = myLoc.getLatitude();
-                myLong = myLoc.getLongitude();
-            } else {
-                myLat = 0.0;
-                myLong = 0.0;
-            }
-
-            new finnLocation(this, new finnLocation.AsyncResponse() {
-                String url ="";
-                @Override
-                public void processFinished(String output) {
-                    url = output;
-
-                }
-            }).execute(myLat, myLong);
-
+            myLat = 0.0;
+            myLong = 0.0;
         }
+
+
+        new finnLocation(this, new finnLocation.AsyncResponse() {
+            String url ="";
+            @Override
+            public void processFinished(String output) {
+                url = output;
+
+            }
+        }).execute(Double.valueOf(myLat), Double.valueOf(myLong));
+
+
 
         Intent mottaXML = getIntent();
         String url="";
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else {
             url = "https://www.yr.no/sted/Norge/Nordland/Rana/Mo_i_Rana/varsel.xml";
-            System.out.println(url);
+
         }
 
         new VaderData(new VaderData.AsyncResponse() {
@@ -115,6 +121,59 @@ public class MainActivity extends AppCompatActivity  {
                 startActivity(intent2);
             }
         });
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            mLatitudeText.setText(String.format("%s: %f", mLatitudeLabel,
+                    mLastLocation.getLatitude()));
+            System.out.println(mLastLocation.getLatitude());
+            System.out.println(mLastLocation.getLongitude());
+            mLongitudeText.setText(String.format("%s: %f", mLongitudeLabel,
+                    mLastLocation.getLongitude()));
+        } else {
+            Toast.makeText(this, "No location detected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
+        // onConnectionFailed.
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+    }
+
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        // The connection to Google Play services was lost for some reason. We call connect() to
+        // attempt to re-establish the connection.
+        Log.i(TAG, "Connection suspended");
+        mGoogleApiClient.connect();
     }
 
     @Override

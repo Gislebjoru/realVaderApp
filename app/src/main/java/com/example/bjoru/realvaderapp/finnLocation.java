@@ -1,16 +1,10 @@
 package com.example.bjoru.realvaderapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.location.*;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,14 +18,24 @@ import java.util.Locale;
 public class finnLocation extends AsyncTask<Double, Void, String> {
 
     private Context context;
+    private ProgressDialog progressDialog;
 
     double myLat;
     double myLong;
 
     protected String doInBackground(Double... params) {
 
+        try {
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+            //dosomethinghereprobably
+            Thread.currentThread().interrupt();
+        }
+
         myLat = params[0];
         myLong = params[1];
+        System.out.println("there should be latitude here...."+params[0]);
 
 
 

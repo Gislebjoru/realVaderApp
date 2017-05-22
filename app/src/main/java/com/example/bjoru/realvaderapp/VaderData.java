@@ -1,6 +1,5 @@
 package com.example.bjoru.realvaderapp;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 
 import org.springframework.http.HttpMethod;

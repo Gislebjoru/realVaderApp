@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".startScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,8 @@
             android:name=".Langtidsvarsel"
             android:label="@string/title_activity_langtidsvarsel"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".sokActivity"></activity>
+        <activity android:name=".sokActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
