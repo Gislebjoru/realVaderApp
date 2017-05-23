@@ -25,11 +25,13 @@ public class sokActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sok);
 
+        //definerer variabler og intents
         final Context context = getApplicationContext();
         final LinearLayout myLL = (LinearLayout) findViewById(R.id.linearSok);
 
         final Intent goBack = new Intent(this, MainActivity.class);
 
+        //definerer knapp og setter onclicklistener
         final Button tilbakeKnapp = (Button) findViewById(R.id.tilbakeKnapp1);
         tilbakeKnapp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -37,11 +39,15 @@ public class sokActivity extends AppCompatActivity {
             }
         });
 
+        //definerer knapp og setter onclicklistener
         final Button sokeKnapp = (Button) findViewById(R.id.sokeKnapp);
         sokeKnapp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                //leser inn fil
                 InputStream fil = context.getResources().openRawResource(R.raw.noreg);
+                    //fjerner alle "current" søkeresultater når knapp trykkes på nytt
                     myLL.removeAllViews();
+                    //definerer variablen text og starter en try and catch
                     String text = "";
                     try {
                         byte[] buffer = new byte[fil.available()];
@@ -51,13 +57,16 @@ public class sokActivity extends AppCompatActivity {
                 } catch (IOException ex) {
                     System.out.println("IOException"+" "+ex);
                 }
+                //finner og navngir variabler, samt splitter på \n og \t
                 EditText mySok = (EditText) findViewById(R.id.sokeFelt);
                 String myString = mySok.getText().toString();
                 String[] linjer = text.split("\n");
                 String mySearch = "";
                 for (String l: linjer) {
                     String[] rader = l.split("\t");
-                    if(rader[1].contains(myString)) {
+                    //om rader[1] samsvarer med det som skrives inn
+                    if(rader[1].toLowerCase().contains(myString.toLowerCase())) {
+                        //setter nytt textview og definerer verdier
                         TextView myTv = new TextView(context);
                         myTv.setMovementMethod(new ScrollingMovementMethod());
                         mySearch = rader[1].toString()+"\n";
@@ -67,8 +76,10 @@ public class sokActivity extends AppCompatActivity {
                         myTv.setText(mySearch);
                         myTv.setTag(rader[12]);
                         myLL.addView(myTv);
+                        //setter onclicklistener på textview som gjør at vi kan trykke på søkeresults
                         myTv.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View view) {
+                                //onclick definer id og send den til mainactivity med intenten goBack
                                 String id = view.getTag().toString();
                                 goBack.putExtra("url", id);
                                 startActivity(goBack);

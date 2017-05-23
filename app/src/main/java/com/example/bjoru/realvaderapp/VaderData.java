@@ -19,6 +19,7 @@ public class VaderData extends AsyncTask<String, Void, WeatherData>{
     @Override
     protected WeatherData doInBackground(String... params) {
 
+        //definerer variabler
         String url = params[0];
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
