@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0B63AD"
     tools:context="com.example.bjoru.realvaderapp.Langtidsvarsel">
 
 
@@ -22,11 +23,12 @@
         android:gravity="center"
         android:maxLines="20"
         android:scrollbars="vertical"
-        android:textColor="#000"
+        android:textColor="#8FC2ED"
         android:textSize="12dp"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="70dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -35,7 +37,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="Langtidsvarsel"
-        android:textColor="#000"
+        android:textColor="#8FC2ED"
         android:textSize="36sp"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignParentLeft="true"
@@ -46,9 +48,10 @@
         android:id="@+id/tilbakeKnapp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#8FC2ED"
+        android:textColor="#010B14"
+        android:text="Tilbake"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="Tilbake" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

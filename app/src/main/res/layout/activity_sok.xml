@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0B63AD"
     tools:context="com.example.bjoru.realvaderapp.sokActivity">
 
     <ScrollView
@@ -31,8 +32,10 @@
     <Button
         android:id="@+id/sokeKnapp"
         android:layout_width="wrap_content"
+        android:background="#8FC2ED"
         android:layout_height="wrap_content"
         android:text="Søk"
+        android:textColor="#010B14"
         android:layout_below="@+id/sokeFelt"
         android:layout_centerHorizontal="true" />
 
@@ -42,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textColor="#010B14"
         android:layout_alignParentTop="true"
         android:ems="10"
         android:inputType="textPersonName" />
@@ -50,9 +54,10 @@
         android:id="@+id/tilbakeKnapp1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Værvarsel for min lokasjon"
+        android:background="#8FC2ED"
+        android:textColor="#010B14"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="Tilbake" />
+        android:layout_centerHorizontal="true" />
 
 </android.widget.RelativeLayout>

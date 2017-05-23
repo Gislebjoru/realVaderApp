@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0B63AD"
     tools:context="com.example.bjoru.realvaderapp.startScreen">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="73dp"
+        android:text="Hva ønsker du å gjøre?"
+        android:gravity="center"
+        android:textColor="#8FC2ED" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -12,15 +25,18 @@
         android:orientation="vertical"
         android:weightSum="1"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout5">
 
         <Button
             android:id="@+id/goToSok"
             android:layout_width="200dp"
+            android:background="#8FC2ED"
             android:layout_height="wrap_content"
             android:layout_above="@+id/findMe"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
+            android:textColor="#010B14"
             android:padding="5dp"
             android:text="Søk" />
 
@@ -28,8 +44,10 @@
             android:id="@+id/findMe"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:background="#8FC2ED"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:textColor="#010B14"
             android:layout_margin="5dp"
             android:padding="5dp"
             android:text="Værvarsel for min lokasjon" />

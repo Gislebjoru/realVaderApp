@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.bjorulaptop.realvaderapp.MainActivity"
-    android:background="#426e86">
+    android:background="#0B63AD" >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -21,7 +21,9 @@
             android:id="@+id/sokeKnapp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Søk" />
+            android:text="Søk"
+            android:background="#8FC2ED"
+            android:textColor="#010B14" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +42,7 @@
             android:gravity="center"
             android:padding="10px"
             android:text="Henter vindretning"
-            android:textColor="#000" />
+            android:textColor="#8FC2ED" />
 
         <TextView
             android:id="@+id/wsText"
@@ -49,7 +51,7 @@
             android:gravity="center"
             android:padding="10px"
             android:text="Henter vindhastighet"
-            android:textColor="#000" />
+            android:textColor="#8FC2ED" />
 
         <TextView
             android:id="@+id/presText"
@@ -58,7 +60,7 @@
             android:gravity="center"
             android:padding="10px"
             android:text="Henter trykk informasjon"
-            android:textColor="#000" />
+            android:textColor="#8FC2ED" />
 
         <Button
             android:id="@+id/button2"
@@ -66,7 +68,9 @@
             android:layout_height="wrap_content"
             android:elevation="0dp"
             android:gravity="center"
-            android:text="Langtidsvarsel" />
+            android:text="Langtidsvarsel"
+            android:background="#8FC2ED"
+            android:textColor="#010B14"/>
 
     </LinearLayout>
 
@@ -97,7 +101,7 @@
             android:text="Henter temperatur"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
-            android:textColor="#000"
+            android:textColor="#8FC2ED"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -109,7 +113,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:text="Henter sted"
-        android:textColor="#000"
-        android:textSize="20dp"/>
+        android:textColor="#8FC2ED"
+        android:textSize="20dp" />
 
 </RelativeLayout>
