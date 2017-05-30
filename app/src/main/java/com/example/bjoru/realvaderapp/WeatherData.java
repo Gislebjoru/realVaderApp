@@ -11,6 +11,13 @@ public class WeatherData {
     @Element(required = false)
     Location location;
 
+    @Element(required = false)
+    Credit credit;
+
+    public Credit getCredit() {
+        return credit;
+    }
+
     public Forecast getForecast() {
         return forecast;
     }

@@ -63,7 +63,7 @@ public class sokActivity extends AppCompatActivity {
                 String[] linjer = text.split("\n");
                 String mySearch = "";
                 for (String l: linjer) {
-                    String[] rader = l.split("\t");
+                    String[] rader = l.split("\t") ;
                     //om rader[1] samsvarer med det som skrives inn
                     if(rader[1].toLowerCase().contains(myString.toLowerCase())) {
                         //setter nytt textview og definerer verdier

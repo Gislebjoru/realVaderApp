@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/linearLayout3"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linearLayout4"
         android:layout_centerHorizontal="true">
 
         <TextView
@@ -115,5 +115,24 @@
         android:text="Henter sted"
         android:textColor="#8FC2ED"
         android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView4"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:textColor="#8FC2ED"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#8FC2ED"
+        android:gravity="center"/>
 
 </RelativeLayout>

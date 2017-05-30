@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
         final TextView wdText = (TextView)findViewById(R.id.wdText);
         final TextView pressureText = (TextView)findViewById(R.id.presText);
         final TextView sted = (TextView) findViewById(R.id.sted);
+        final TextView kreditt = (TextView) findViewById(R.id.textView3);
+        final TextView kreditt2 = (TextView) findViewById(R.id.textView4);
 
         //henter intent fra søk
         Intent mottaXML = getIntent();
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
                 mySymbol.setImageResource(getResources().getIdentifier(ws, "drawable", getPackageName()));
 
                 //navngir variabler
+                String kredit = output.getCredit().getLink().getText();
+                String kreditUrl = output.getCredit().getLink().getUrl();
                 List<Time> timeList = output.getForecast().getTimeList();
                 final String timeFrom = output.getForecast().getTimeList().get(0).getFrom();
                 final String timeTo = output.getForecast().getTimeList().get(0).getTo();
@@ -85,6 +89,8 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
                 String myStad = output.getLocation().getName();
 
                 //setter text til textviews
+                kreditt.setText(String.valueOf(kredit));
+                kreditt2.setText(String.valueOf(kreditUrl));
                 tempText.setText(String.valueOf(temp.getValue()+" "+temp.getUnit()));
                 wsText.setText(String.valueOf(wspeed.getMps()+" Meter i sekundet, "+wspeed.getName()));
                 wdText.setText(String.valueOf(wdir.getName()+" Vindretning"));
